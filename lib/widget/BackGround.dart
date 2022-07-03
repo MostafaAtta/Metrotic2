@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -54,7 +55,7 @@ bottom: 0,
 
                  Container(
                    child: Text(
-                     'Log In',
+                     'Log In'.tr(),
                      style: TextStyle(
                        fontFamily: 'Montserrat',
                        fontSize: 20,
@@ -86,7 +87,7 @@ bottom: 0,
                    child: Container(
 
                      child: Text(
-                       'Sign Up',
+                       'Sign Up'.tr(),
                        style: TextStyle(
                          fontFamily: 'Montserrat',
                          fontSize: 20,

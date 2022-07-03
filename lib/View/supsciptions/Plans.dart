@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../helper.dart';
@@ -24,7 +25,7 @@ class _PlansState extends State<Plans> {
           height: 20,
         ),
         Text(
-          "Plans",
+          "Plans".tr(),
           style: TextStyle(
               fontWeight: FontWeight.bold,
               color: ColorsHelp.background,
@@ -46,7 +47,7 @@ class _PlansState extends State<Plans> {
           width: 320,
           decoration: BoxDecoration(color: ColorsHelp.background,borderRadius: BorderRadius.circular(20)),
           child: Center(
-           child: Text("Monthly",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),)
+           child: Text("Monthly".tr(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),)
           ),
         )
           ,),
@@ -64,7 +65,7 @@ class _PlansState extends State<Plans> {
           width: 320,
           decoration: BoxDecoration(color: ColorsHelp.background,borderRadius: BorderRadius.circular(20)),
           child: Center(
-              child: Text("3 Months",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),)
+              child: Text("3 Months".tr(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),)
           ),
         )
           ,),
@@ -84,7 +85,7 @@ class _PlansState extends State<Plans> {
           width: 320,
           decoration: BoxDecoration(color: ColorsHelp.background,borderRadius: BorderRadius.circular(20)),
           child: Center(
-              child: Text("Yearly",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),)
+              child: Text("Yearly".tr(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 30,color: Colors.white),)
           ),
         )
           ,)

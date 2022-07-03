@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -51,8 +52,8 @@ class _SignInState extends State<SignIn> {
                       controller: emailController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
-                        labelText: "Email",
-                        hintText: "Enter Your Email",
+                        labelText: "Email".tr(),
+                        hintText: "Enter Your Email".tr(),
                       ),
                       keyboardType: TextInputType.emailAddress,
 
@@ -64,8 +65,8 @@ class _SignInState extends State<SignIn> {
                       controller: passwordController,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
-                        labelText: "Password",
-                        hintText: "Enter Your Password",
+                        labelText: "Password".tr(),
+                        hintText: "Enter Your Password".tr(),
                       ),
                       keyboardType: TextInputType.visiblePassword,
                       obscureText: true,
@@ -107,7 +108,7 @@ class _SignInState extends State<SignIn> {
                       child: Center(
 
                         child: Text(
-                          'log in',
+                          'log in'.tr(),
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 13,
@@ -131,7 +132,7 @@ class _SignInState extends State<SignIn> {
                 },
                 child: Center(
                   child: Text(
-                    'Forgot password?',
+                    'Forgot password?'.tr(),
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontSize: 13,

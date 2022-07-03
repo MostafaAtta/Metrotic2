@@ -41,7 +41,8 @@ dependencies:
   flutter_polyline_points:
   floating_action_bubble: 1.1.4
   flutter_sliding_up_panel:
-
+  flutter_local_notifications: ^9.5.3+1
+  rxdart: ^0.27.3
   cupertino_icons: ^1.0.2
   firebase_core:
   firebase_auth: ^3.3.12
@@ -49,6 +50,8 @@ dependencies:
   firebase_auth_web:
   shared_preferences:
   intl: ^0.17.0
+  easy_localization: ^3.0.0
+  photo_view: ^0.14.0
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +84,8 @@ flutter:
   uses-material-design: true
   assets:
     - assets/
+    - assets/images/
+    - assets/translate/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

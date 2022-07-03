@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../firebase_auth.dart';
@@ -122,7 +123,7 @@ class _VerificationState extends State<Verification> {
                       width: 114.0,
                       height: 16.0,
                       child: Text(
-                        'Confirm Account',
+                        'Confirm Account'.tr(),
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontSize: 13,
@@ -169,7 +170,7 @@ class _VerificationState extends State<Verification> {
                             color: const Color(0xff00334a),
                             borderRadius: BorderRadius.circular(28.0),
                           ),   child: Center(child: Text(
-                        'confirm',
+                        'confirm'.tr(),
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontSize: 13,
@@ -187,7 +188,7 @@ class _VerificationState extends State<Verification> {
                     SizedBox(height: 10,),
 
                     Text(
-                      '* Code sent to your phone number *',
+                      '* Code sent to your phone number *'.tr(),
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 14,
@@ -201,7 +202,7 @@ class _VerificationState extends State<Verification> {
                     SizedBox(height: 10,),
                     GestureDetector(
                       child: Text(
-                        'Didn\'t receive your code ?',
+                        'Didn\'t receive your code ?'.tr(),
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontSize: 14,

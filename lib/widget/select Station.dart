@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../helper.dart';
@@ -126,7 +127,7 @@ class SelectStation extends StatelessWidget {
                   ),
                   GestureDetector(
                     child: Text(
-                      "From Station",
+                      "From Station".tr(),
                       style:
                       TextStyle(color: ColorsHelp.background),
                     ),
@@ -157,7 +158,7 @@ class SelectStation extends StatelessWidget {
                       ),
                       GestureDetector(
                         child: Text(
-                          "To Station",
+                          "To Station".tr(),
                           style: TextStyle(
                               color: ColorsHelp.background),
                         ),

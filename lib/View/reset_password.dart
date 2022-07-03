@@ -1,5 +1,4 @@
-
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,11 +6,8 @@ import 'package:provider/provider.dart';
 import '../firebase_auth.dart';
 import 'SignIn.dart';
 
-
 class ResetPasswordScreen extends StatefulWidget {
-
   static const routeName = "/reset_password";
-
 
   const ResetPasswordScreen({Key? key}) : super(key: key);
 
@@ -20,14 +16,12 @@ class ResetPasswordScreen extends StatefulWidget {
 }
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
-
   final TextEditingController emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-
-    var height =MediaQuery.of(context).size.height;
-    var width =MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       body: Padding(
@@ -39,54 +33,57 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               height: 250,
             ),
             Text(
-              'Reset Password',
+              'Reset Password'.tr(),
               style: TextStyle(
                 fontSize: 25,
                 fontWeight: FontWeight.w700,
                 color: const Color(0xff00334a),
-
               ),
             ),
             SizedBox(
               height: 5,
             ),
             Text(
-              'Please enter your email address',
+              'Please enter your email address'.tr(),
               style: TextStyle(
-              color: const Color(0xff00334a),
-
-            ),
+                color: const Color(0xff00334a),
+              ),
             ),
             SizedBox(
               height: 30,
             ),
-        TextField(
-          controller: emailController,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(borderRadius: BorderRadius.all(Radius.circular(32.0))),
-            labelText: "Email",
-            hintText: "Enter Your Email",
-          ),
-          keyboardType: TextInputType.emailAddress,
-
-        ),
+            TextField(
+              controller: emailController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(32.0))),
+                labelText: "Email".tr(),
+                hintText: "Enter Your Email".tr(),
+              ),
+              keyboardType: TextInputType.emailAddress,
+            ),
             SizedBox(
               height: 40,
             ),
             GestureDetector(
               onTap: () {
-
                 context.read<AuthService>().resetPassword(
-                  email: emailController.text.trim(),
-                );
+                    email: emailController.text.trim(), context: context);
 
-                Navigator.of(context).pushReplacementNamed(
-                      SignIn.routeName);
-
-
+                Navigator.of(context).pushReplacementNamed(SignIn.routeName);
               },
               child: Container(
-                  margin: EdgeInsets.only(left:width>1000?width*0.45:width> 400?width*0.40:100,right: width>1000?width*0.45:width> 400?width*0.40:100),
+                  margin: EdgeInsets.only(
+                      left: width > 1000
+                          ? width * 0.45
+                          : width > 400
+                              ? width * 0.40
+                              : 100,
+                      right: width > 1000
+                          ? width * 0.45
+                          : width > 400
+                              ? width * 0.40
+                              : 100),
                   width: 190.0,
                   height: 55.0,
                   decoration: BoxDecoration(
@@ -96,17 +93,14 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                   child: GestureDetector(
                     onTap: () {
                       context.read<AuthService>().resetPassword(
-                        email: emailController.text.trim(),
-                      );
+                          email: emailController.text.trim(), context: context);
 
-                      Navigator.of(context).pushReplacementNamed(
-                          SignIn.routeName);
-
+                      Navigator.of(context)
+                          .pushReplacementNamed(SignIn.routeName);
                     },
                     child: Center(
-
                       child: Text(
-                        'Reset password',
+                        'Reset password'.tr(),
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontSize: 13,
@@ -116,13 +110,12 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           height: 1.2307692307692308,
                         ),
                         textHeightBehavior:
-                        TextHeightBehavior(applyHeightToFirstAscent: false),
+                            TextHeightBehavior(applyHeightToFirstAscent: false),
                         softWrap: false,
                       ),
                     ),
                   )),
             ),
-
           ],
         ),
       ),

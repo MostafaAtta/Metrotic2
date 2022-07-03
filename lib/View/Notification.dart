@@ -1,13 +1,32 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
+import 'package:test/widget/notification_widget.dart';
 
+import '../firebase_auth.dart';
 import '../helper.dart';
 import '../widget/botom Bar.dart';
 import 'menu.dart';
 
 class Notif extends StatelessWidget {
+  final bool? isBooking;
+  final bool? isExpired;
+  final bool? isPurchased;
+  final bool? isLogin;
+  final bool? isReserved;
+
+  Notif({
+    this.isBooking = false,
+    this.isExpired = false,
+    this.isPurchased = false,
+    this.isLogin = false,
+    this.isReserved = false,
+  });
+
   @override
   Widget build(BuildContext context) {
+    List<Map<String, Object>> notifications = <Map<String, Object>>[];
     return Scaffold(
         bottomNavigationBar: BotoomBar(
           index: 4,
@@ -27,10 +46,11 @@ class Notif extends StatelessWidget {
                           },
                           icon: Icon(
                             Icons.arrow_back_ios,
-                            color: Colors.green,size: 30,
+                            color: Colors.green,
+                            size: 30,
                           )),
                       Text(
-                        "Notification",
+                        "Notification".tr(),
                         style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -59,221 +79,31 @@ class Notif extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              padding: EdgeInsets.only(left: 15,right: 15),
-              height: MediaQuery.of(context).size.height - 200,
-              decoration: BoxDecoration(
-                color: const Color(0xff00334a),
-                borderRadius: BorderRadius.circular(30.0),
-              ),
-              child: ListView(
-                children: [
-                  Column(
-                    children: [
-                      SizedBox(
-                        height: 40,
+            FutureBuilder(
+                future: context.read<AuthService>().getNotifications(),
+                builder:
+                    (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+                  if (!snapshot.hasData)
+                    return Align(
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator());
 
+                  notifications = snapshot.data;
+                  return Container(
+                      padding: EdgeInsets.all(16),
+                      height: MediaQuery.of(context).size.height - 200,
+                      decoration: BoxDecoration(
+                        color: const Color(0xff00334a),
+                        borderRadius: BorderRadius.circular(30.0),
                       ),
-                      Row(
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.notifications_active,
-                                color: Colors.green,
-                                size: 40,
-                              )),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'your ticket has been booked \nsuccessfully',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 15,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w500,
-                              height: 1.5294117647058822,
-                            ),
-                            textHeightBehavior: TextHeightBehavior(
-                                applyHeightToFirstAscent: false),
-                            softWrap: false,
-                          )
-                        ],
-                      ),
-
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Divider(color: Colors.white,thickness: 2,),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.notifications_active,
-                                color: Colors.green,
-                                size: 40,
-                              )),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'your ticket has been booked \nsuccessfully',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 15,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w500,
-                              height: 1.5294117647058822,
-                            ),
-                            textHeightBehavior: TextHeightBehavior(
-                                applyHeightToFirstAscent: false),
-                            softWrap: false,
-                          )
-                        ],
-                      ),
-                       SizedBox(
-                        height: 15,
-                      ),
-                      Divider(color: Colors.white,thickness: 2,),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.notifications_active,
-                                color: Colors.white,
-                                size: 40,
-                              )),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'your ticket has been Expired',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 15,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w500,
-                              height: 1.5294117647058822,
-                            ),
-                            textHeightBehavior: TextHeightBehavior(
-                                applyHeightToFirstAscent: false),
-                            softWrap: false,
-                          )
-                        ],
-                      )   ,SizedBox(
-                        height: 15,
-                      ),
-                      Divider(color: Colors.white,thickness: 2,),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Row(
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.notifications_active,
-                                color: Colors.white,
-                                size: 40,
-                              )),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'your ticket has been booked \nsuccessfully',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 15,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w500,
-                              height: 1.5294117647058822,
-                            ),
-                            textHeightBehavior: TextHeightBehavior(
-                                applyHeightToFirstAscent: false),
-                            softWrap: false,
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Divider(color: Colors.white,thickness: 2,),
-                      SizedBox(
-                        height: 15,
-                      ),                      Row(
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.notifications_active,
-                                color: Colors.white,
-                                size: 40,
-                              )),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'your ticket has been booked \nsuccessfully',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 15,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w500,
-                              height: 1.5294117647058822,
-                            ),
-                            textHeightBehavior: TextHeightBehavior(
-                                applyHeightToFirstAscent: false),
-                            softWrap: false,
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Divider(color: Colors.white,thickness: 2,),
-                      SizedBox(
-                        height: 15,
-                      ),                      Row(
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: Icon(
-                                Icons.notifications_active,
-                                color: Colors.white,
-                                size: 40,
-                              )),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'your ticket has been Expired',
-                            style: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontSize: 15,
-                              color: const Color(0xffffffff),
-                              fontWeight: FontWeight.w500,
-                              height: 1.5294117647058822,
-                            ),
-                            textHeightBehavior: TextHeightBehavior(
-                                applyHeightToFirstAscent: false),
-                            softWrap: false,
-                          )
-                        ],
-                      )
-                    ],
-                  )
-                ],
-              ),
-            ),
+                      child: ListView.builder(
+                          itemCount: notifications.length,
+                          itemBuilder: (BuildContext cxt, int i) {
+                            return NotificationWidget(
+                                title: notifications[i]['title'] as String,
+                                body: notifications[i]['body'] as String);
+                          }));
+                }),
           ]),
         ));
   }

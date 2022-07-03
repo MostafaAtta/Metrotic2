@@ -20,7 +20,6 @@ class MapLocation extends StatefulWidget {
 }
 
 class _MapLocationState extends State<MapLocation> {
-
   CameraPosition _initialLocation =
       CameraPosition(target: LatLng(30.033333, 31.233334), zoom: 8);
   late GoogleMapController mapController;
@@ -41,7 +40,7 @@ class _MapLocationState extends State<MapLocation> {
   Set<Marker> markers = {};
 
   late PolylinePoints polylinePoints;
-  final Set<Polyline>_polyline={};
+  final Set<Polyline> _polyline = {};
 
   Map<PolylineId, Polyline> polylines = {};
 
@@ -51,9 +50,9 @@ class _MapLocationState extends State<MapLocation> {
 
   @override
   void initState() {
-   _getCurrentLocation();
+    _getCurrentLocation();
 
-   super.initState();
+    super.initState();
   }
 
   Widget _textField({
@@ -154,7 +153,6 @@ class _MapLocationState extends State<MapLocation> {
       List<Location> startPlacemark = await locationFromAddress(_startAddress);
       List<Location> destinationPlacemark =
           await locationFromAddress(_destinationAddress);
-
 
       double startLatitude = _startAddress == _currentAddress
           ? _currentPosition.latitude
@@ -262,10 +260,10 @@ class _MapLocationState extends State<MapLocation> {
         );
       }
 
-      setState(()async {
+      setState(() async {
         distanceInMeters;
-      await  _createPolylines(startLatitude, startLongitude, destinationLatitude,
-            destinationLongitude);
+        await _createPolylines(startLatitude, startLongitude,
+            destinationLatitude, destinationLongitude);
         _placeDistance = totalDistance.toStringAsFixed(2);
         print('DISTANCE: $_placeDistance km');
       });
@@ -276,154 +274,149 @@ class _MapLocationState extends State<MapLocation> {
     }
     return false;
   }
+
   List<Destination> destinationlist = [];
 
-   NearestStation(){
-    var A=    _coordinateDistance(_currentPosition.latitude,_currentPosition.longitude,30.12411, 31.24358);
-    var B=    _coordinateDistance(_currentPosition.latitude,_currentPosition.longitude,30.1139678256, 31.2492867704);
-    var C=    _coordinateDistance(_currentPosition.latitude,_currentPosition.longitude,30.10408, 31.24562);
-    var D=    _coordinateDistance(_currentPosition.latitude,_currentPosition.longitude,30.0999764249, 31.2462914808);
-    var E=    _coordinateDistance(_currentPosition.latitude,_currentPosition.longitude,30.0879592, 31.2455034);
+  NearestStation() {
+    var A = _coordinateDistance(_currentPosition.latitude,
+        _currentPosition.longitude, 30.12411, 31.24358);
+    var B = _coordinateDistance(_currentPosition.latitude,
+        _currentPosition.longitude, 30.1139678256, 31.2492867704);
+    var C = _coordinateDistance(_currentPosition.latitude,
+        _currentPosition.longitude, 30.10408, 31.24562);
+    var D = _coordinateDistance(_currentPosition.latitude,
+        _currentPosition.longitude, 30.0999764249, 31.2462914808);
+    var E = _coordinateDistance(_currentPosition.latitude,
+        _currentPosition.longitude, 30.0879592, 31.2455034);
 
-if(A<B && A<C&&A<D&&A<E){
+    if (A < B && A < C && A < D && A < E) {
+      Marker startMarker = Marker(
+        markerId: MarkerId("2"),
+        position: LatLng(30.12411, 31.24358),
+        infoWindow: InfoWindow(
+          title: "To",
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      );
 
-  Marker startMarker = Marker(
-    markerId: MarkerId("2"),
-    position: LatLng(30.12411, 31.24358),
-    infoWindow: InfoWindow(
-      title:"To" ,
+      // Destination Location Marker
+      Marker destinationMarker = Marker(
+        markerId: MarkerId("1"),
+        position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+        infoWindow: InfoWindow(
+          title: 'From',
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      );
 
-    ),
-    icon: BitmapDescriptor.defaultMarker,
-  );
+      setState(() {
+        markers.add(startMarker);
+        markers.add(destinationMarker);
 
-  // Destination Location Marker
-  Marker destinationMarker = Marker(
-    markerId: MarkerId("1"),
-    position: LatLng(_currentPosition.latitude,_currentPosition.longitude),
-    infoWindow: InfoWindow(
-      title: 'From',
-    ),
-    icon: BitmapDescriptor.defaultMarker,
-  );
+        _polyline.add(Polyline(
+            polylineId: PolylineId("1"),
+            visible: true,
+            points: [
+              LatLng(_currentPosition.latitude, _currentPosition.longitude),
+              LatLng(30.12411, 31.24358),
+            ],
+            color: Colors.blue,
+            width: 3));
+      });
+    } else if (B < A && B < C && B < D && B < E) {
+      Marker startMarker = Marker(
+        markerId: MarkerId("2"),
+        position: LatLng(30.1139678256, 31.2492867704),
+        infoWindow: InfoWindow(
+          title: "To",
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      );
 
-  setState(() {
+      // Destination Location Marker
+      Marker destinationMarker = Marker(
+        markerId: MarkerId("1"),
+        position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+        infoWindow: InfoWindow(
+          title: 'From',
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      );
+      setState(() {
+        markers.add(startMarker);
+        markers.add(destinationMarker);
+      });
+    } else if (C < A && C < B && C < D && C < E) {
+      Marker startMarker = Marker(
+        markerId: MarkerId("2"),
+        position: LatLng(30.10408, 31.24562),
+        infoWindow: InfoWindow(
+          title: "To",
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      );
 
-    markers.add(startMarker);
-    markers.add(destinationMarker);
+      // Destination Location Marker
+      Marker destinationMarker = Marker(
+        markerId: MarkerId("1"),
+        position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+        infoWindow: InfoWindow(
+          title: 'From',
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      );
+      setState(() {
+        markers.add(startMarker);
+        markers.add(destinationMarker);
+      });
+    } else if (D < A && D < B && D < C && D < E) {
+      Marker startMarker = Marker(
+        markerId: MarkerId("2"),
+        position: LatLng(30.0999764249, 31.2462914808),
+        infoWindow: InfoWindow(
+          title: "To",
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      );
 
-    _polyline.add(Polyline(
-      polylineId: PolylineId("1"),
-      visible: true,
-points: [LatLng(_currentPosition.latitude,_currentPosition.longitude),LatLng(30.12411, 31.24358),],
-      color: Colors.blue,
-      width: 3
-    ));
-  });
-}else if(B<A && B<C&&B<D&&B<E){
-  Marker startMarker = Marker(
-    markerId: MarkerId("2"),
-    position: LatLng(30.1139678256, 31.2492867704),
-    infoWindow: InfoWindow(
-      title:"To" ,
+      // Destination Location Marker
+      Marker destinationMarker = Marker(
+        markerId: MarkerId("1"),
+        position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+        infoWindow: InfoWindow(
+          title: 'From',
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      );
+      setState(() {
+        markers.add(startMarker);
+        markers.add(destinationMarker);
+      });
+    } else {
+      Marker startMarker = Marker(
+        markerId: MarkerId("2"),
+        position: LatLng(30.0879592, 31.2455034),
+        infoWindow: InfoWindow(
+          title: "To",
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      );
 
-    ),
-    icon: BitmapDescriptor.defaultMarker,
-  );
-
-  // Destination Location Marker
-  Marker destinationMarker = Marker(
-    markerId: MarkerId("1"),
-    position: LatLng(_currentPosition.latitude,_currentPosition.longitude),
-    infoWindow: InfoWindow(
-      title: 'From',
-    ),
-    icon: BitmapDescriptor.defaultMarker,
-  );
-  setState(() {
-    markers.add(startMarker);
-    markers.add(destinationMarker);
-  });
-
-
-}else if(C<A && C<B&&C<D&&C<E){
-  Marker startMarker = Marker(
-    markerId: MarkerId("2"),
-    position: LatLng(30.10408, 31.24562),
-    infoWindow: InfoWindow(
-      title:"To" ,
-
-    ),
-    icon: BitmapDescriptor.defaultMarker,
-  );
-
-  // Destination Location Marker
-  Marker destinationMarker = Marker(
-    markerId: MarkerId("1"),
-    position: LatLng(_currentPosition.latitude,_currentPosition.longitude),
-    infoWindow: InfoWindow(
-      title: 'From',
-    ),
-    icon: BitmapDescriptor.defaultMarker,
-  );
-  setState(() {
-    markers.add(startMarker);
-    markers.add(destinationMarker);
-  });
-
-
-}else if(D<A && D<B&&D<C&&D<E){
-  Marker startMarker = Marker(
-    markerId: MarkerId("2"),
-    position: LatLng(30.0999764249, 31.2462914808),
-    infoWindow: InfoWindow(
-      title:"To" ,
-
-    ),
-    icon: BitmapDescriptor.defaultMarker,
-  );
-
-  // Destination Location Marker
-  Marker destinationMarker = Marker(
-    markerId: MarkerId("1"),
-    position: LatLng(_currentPosition.latitude,_currentPosition.longitude),
-    infoWindow: InfoWindow(
-      title: 'From',
-    ),
-    icon: BitmapDescriptor.defaultMarker,
-  );
-  setState(() {
-    markers.add(startMarker);
-    markers.add(destinationMarker);
-  });
-
-
-}else{
-  Marker startMarker = Marker(
-    markerId: MarkerId("2"),
-    position: LatLng(30.0879592, 31.2455034),
-    infoWindow: InfoWindow(
-      title:"To" ,
-
-    ),
-    icon: BitmapDescriptor.defaultMarker,
-  );
-
-  // Destination Location Marker
-  Marker destinationMarker = Marker(
-    markerId: MarkerId("1"),
-    position: LatLng(_currentPosition.latitude,_currentPosition.longitude),
-    infoWindow: InfoWindow(
-      title: 'From',
-    ),
-    icon: BitmapDescriptor.defaultMarker,
-  );
-  setState(() {
-    markers.add(startMarker);
-    markers.add(destinationMarker);
-  });
-}
-   }
+      // Destination Location Marker
+      Marker destinationMarker = Marker(
+        markerId: MarkerId("1"),
+        position: LatLng(_currentPosition.latitude, _currentPosition.longitude),
+        infoWindow: InfoWindow(
+          title: 'From',
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      );
+      setState(() {
+        markers.add(startMarker);
+        markers.add(destinationMarker);
+      });
+    }
+  }
 
   double _coordinateDistance(lat1, lon1, lat2, lon2) {
     var p = 0.017453292519943295;
@@ -513,11 +506,10 @@ points: [LatLng(_currentPosition.latitude,_currentPosition.longitude),LatLng(30.
               onMapCreated: (GoogleMapController controller) {
                 mapController = controller;
                 if (widget.GetNearStation == 2) {
-
-setState(() {
-  NearestStation();
-
-});}
+                  setState(() {
+                    NearestStation();
+                  });
+                }
                 if (widget.GetLocation == 1) {
                   mapController.animateCamera(
                     CameraUpdate.newCameraPosition(
@@ -683,8 +675,7 @@ setState(() {
                                       _placeDistance = null;
                                     });
 
-                                     _calculateDistance()  .then((isCalculated)
-                             {
+                                    _calculateDistance().then((isCalculated) {
                                       if (isCalculated) {
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
@@ -840,7 +831,6 @@ setState(() {
             //     },
             //   ),
             // ))
-
           ],
         ),
       ),

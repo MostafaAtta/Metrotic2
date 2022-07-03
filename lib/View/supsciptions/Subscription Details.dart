@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -28,7 +29,7 @@ class _SupscripDetails1State extends State<SupscripDetails1> {
         body: SafeArea(
             child: Column(
           children: [
-            AppBarr(text: ("Subscription \nDetails")),
+            AppBarr(text: ("Subscription \nDetails".tr())),
             SizedBox(
               height: 80,
             ),
@@ -64,7 +65,7 @@ class _SupscripDetails1State extends State<SupscripDetails1> {
                       width: 15,
                     ),
                     Text(
-                      'Tickets Price',
+                      'Tickets Price'.tr(),
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 25,
@@ -119,7 +120,7 @@ class _SupscripDetails1State extends State<SupscripDetails1> {
                       width: 20,
                     ),
                     Text(
-                      'Plans',
+                      'Plans'.tr(),
                       style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 30,

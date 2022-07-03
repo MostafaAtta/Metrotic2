@@ -15,7 +15,7 @@ class BotoomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return JumpingTabBar(
-      duration:Duration(seconds: 1) ,
+      duration: Duration(seconds: 1),
       backgroundColor: Colors.white,
       circleGradient: LinearGradient(
         colors: [Colors.white, Colors.white],
@@ -43,15 +43,18 @@ class BotoomBar extends StatelessWidget {
         ),
         TabItemIcon(
             buildWidget: (_, color) => GestureDetector(
-
                   onTap: () {
                     Navigator.push(
                         context, MaterialPageRoute(builder: (_) => Home()));
                   },
                   child: Container(
-                    height: 50,width: 50,
-
-                    child:Icon(Icons.near_me,color: ColorsHelp.background,size: 30,),
+                    height: 50,
+                    width: 50,
+                    child: Icon(
+                      Icons.near_me,
+                      color: ColorsHelp.background,
+                      size: 30,
+                    ),
                   ),
                 ),
             curveColor: ColorsHelp.backgroundG),
@@ -71,22 +74,21 @@ class BotoomBar extends StatelessWidget {
           ),
         ),
         TabItemIcon(
-          curveColor: ColorsHelp.backgroundG,
+            curveColor: ColorsHelp.backgroundG,
             buildWidget: (_, color) => GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => Notif()));
-                  },
-                  child: Container(
-
-                 child: Stack(
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => Notif()));
+                },
+                child: Container(
+                  child: Stack(
                     children: <Widget>[
                       new Icon(
                         Icons.notifications,
                         size: 35,
                         color: ColorsHelp.background,
                       ),
-                      new Positioned(
+                      /*new Positioned(
                         top: 1.0,
                         right: 0.0,
                         child: new Stack(
@@ -108,26 +110,25 @@ class BotoomBar extends StatelessWidget {
                             )
                           ],
                         ),
-                      )
+                      )*/
                     ],
                   ),
-                  )
-                )),
+                ))),
         TabItemIcon(
-          curveColor: ColorsHelp.backgroundG,
+            curveColor: ColorsHelp.backgroundG,
             buildWidget: (_, color) => GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => Setting()));
-                  },
-                  child: Container(
-                      height: 50,width: 50,
-                      child: Icon(
-                    Icons.settings,
-                    color: ColorsHelp.background,
-                    size: 35,
-                  ))
-                )),
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => Setting()));
+                },
+                child: Container(
+                    height: 50,
+                    width: 50,
+                    child: Icon(
+                      Icons.settings,
+                      color: ColorsHelp.background,
+                      size: 35,
+                    )))),
       ],
       selectedIndex: index,
     );

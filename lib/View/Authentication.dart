@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:test/View/HomScreen.dart';
@@ -67,10 +68,10 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                       ),
                       tabs: [
                         Tab(
-                          text: '        Login        ',
+                          text: '        Login        '.tr(),
                         ),
                         Tab(
-                          text: '       Sign-up       ',
+                          text: '       Sign-up       '.tr(),
                         ),
                       ],
                       controller: _tabController,
@@ -96,7 +97,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Email address",
+                                  "Email address".tr(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.grey),
@@ -111,7 +112,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Password",
+                                  "Password".tr(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.grey),
@@ -125,7 +126,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                             Container(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                "Forgot password?",
+                                "Forgot password?".tr(),
                                 style: TextStyle(color: ColorsHelp.background),
                                 textAlign: TextAlign.start,
                               ),
@@ -148,7 +149,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                                           builder: (context) => Home()));
                                 },
                                 child: Text(
-                                  "Login",
+                                  "Login".tr(),
                                   style: TextStyle(
                                     fontSize: 17,
                                     color: Colors.white,
@@ -172,7 +173,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Name",
+                                  "Name".tr(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.grey),
@@ -187,7 +188,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Phone Number",
+                                  "Phone Number".tr(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.grey),
@@ -202,7 +203,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Email address",
+                                  "Email address".tr(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.grey),
@@ -217,12 +218,12 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Password",
+                                  "Password".tr(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.grey),
                                 ),
-                                buildPasswordField('Password'),
+                                buildPasswordField('Password'.tr()),
                               ],
                             ),
                             SizedBox(
@@ -233,7 +234,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Tag ID",
+                                  "Tag ID".tr(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.grey),
@@ -248,7 +249,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "National ID",
+                                  "National ID".tr(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: Colors.grey),
@@ -275,7 +276,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                                           builder: (context) => Verification()));
                                 },
                                 child: Text(
-                                  "Signup",
+                                  "Signup".tr(),
                                   style: TextStyle(
                                     fontSize: 17,
                                     color: Colors.white,
@@ -288,7 +289,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Already have an account?',
+                                  'Already have an account?'.tr(),
                                   style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 14,
@@ -304,7 +305,7 @@ class _AuthenticationPageState extends State<AuthenticationPage>
                                     _tabController!.animateTo(0,duration: Duration(seconds: 1),curve: Curves.ease);
                                   },
                                   child: Text(
-                                    'Login',
+                                    'Login'.tr(),
 
                                     style: TextStyle(
                                       fontFamily: 'Montserrat',

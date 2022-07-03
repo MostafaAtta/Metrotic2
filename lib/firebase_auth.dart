@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,14 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animated_dialog/flutter_animated_dialog.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:test/models/wallet.dart';
 
 import 'View/HomScreen.dart';
 import 'View/rechargeBalance.dart';
 import 'View/verification.dart';
 import 'models/user.dart' as myUser;
+import 'notification_service.dart';
 
 class AuthService {
   final auth.FirebaseAuth _firebaseAuth;
+
   AuthService(this._firebaseAuth);
 
 /*
@@ -39,14 +43,19 @@ class AuthService {
       FirebaseFirestore.instance.collection('Wallets');
   CollectionReference cardsReference =
       FirebaseFirestore.instance.collection('Cards');
-
+  CollectionReference notificationsReference =
+      FirebaseFirestore.instance.collection('notifications');
+  CollectionReference stationsReference =
+      FirebaseFirestore.instance.collection('stations');
   CollectionReference subscriptionsReference =
       FirebaseFirestore.instance.collection('Subscriptions');
 
-  Future<String?> resetPassword({required String email}) async {
+  Future<String?> resetPassword(
+      {required String email, required BuildContext context}) async {
     try {
       await _firebaseAuth.sendPasswordResetEmail(email: email);
-      return "Done";
+      showConfirmation(context: context);
+      return "Done".tr();
     } on auth.FirebaseAuthException catch (e) {
       return e.message;
     }
@@ -93,6 +102,18 @@ class AuthService {
     prefs.setString('nationalID', user.nationalID);
   }
 
+  Future<myUser.User> getLocalUser() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    return myUser.User(
+        uid: prefs.getString("uid") ?? "",
+        email: prefs.getString("email") ?? "",
+        name: prefs.getString("name") ?? "",
+        phone: prefs.getString("phone") ?? "",
+        tagID: prefs.getString("tagID") ?? "",
+        nationalID: prefs.getString("nationalID") ?? "");
+  }
+
   Future<void> signIn(
       {required String email,
       required String password,
@@ -130,6 +151,31 @@ class AuthService {
         Navigator.of(context).pushReplacementNamed(Home.routeName);
       });
     });
+  }
+
+  Future<myUser.User> checkUserUpdates() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    late myUser.User user;
+    CollectionReference usersReference =
+        FirebaseFirestore.instance.collection('Users');
+
+    String uid = prefs.getString("uid") ?? "";
+
+    await usersReference.doc(uid).get().then((result) {
+      user = myUser.User(
+          uid: result.id,
+          email: result.get('email'),
+          name: result.get('name'),
+          phone: result.get('phone'),
+          tagID: result.get('tagID'),
+          nationalID: result.get('nationalID'));
+
+      //print(result.id);
+      _saveUser(user);
+    });
+
+    return user;
   }
 
   Future<void> checkUser(
@@ -288,9 +334,14 @@ class AuthService {
       'price': price,
     }).then((value) {
       print("${value.id}");
-      //showSnackBar(context, "Ticket purchasing done");
-      updateWallet(
-          walletId: walletId, price: price, balance: balance, context: context);
+      saveNotification(
+          title: "New subscription",
+          body: "New subscription created, price $price LE",
+          uid: uid,
+          walletId: walletId,
+          price: price,
+          balance: balance,
+          context: context);
     });
   }
 
@@ -312,19 +363,77 @@ class AuthService {
       'price': price,
     }).then((value) {
       print("${value.id}");
-      //showSnackBar(context, "Ticket purchasing done");
+      saveNotification(
+          title: "New ticket",
+          body:
+              "New ticket created, valid for $noOfStations stations, price $price LE",
+          uid: uid,
+          walletId: walletId,
+          price: price,
+          balance: balance,
+          context: context);
+    });
+  }
+
+  Future<void> saveNotification(
+      {required String uid,
+      required String title,
+      required String body,
+      required String walletId,
+      required int price,
+      required int balance,
+      required BuildContext context}) async {
+    await notificationsReference.add({
+      'uid': uid,
+      'title': title,
+      'body': body,
+    }).then((value) {
+      NotificationService.showNotification(
+          title: title, body: body, payload: "purchased");
       updateWallet(
           walletId: walletId, price: price, balance: balance, context: context);
     });
   }
 
-  Future<void> checkWallet(
-      {required String uid,
-      required String noOfStations,
+  Future<void> checkTicket(
+      {required String noOfStations,
       required String subId,
       required int price,
       required bool ticket,
       required BuildContext context}) async {
+    var hasTicket = false;
+    final prefs = await SharedPreferences.getInstance();
+
+    String uid = prefs.getString("uid") ?? "";
+    log(uid);
+
+    await ticketsReference.where('uid', isEqualTo: uid).get().then((value) {
+      value.docs.forEach((result) {
+        hasTicket = true;
+      });
+      if (hasTicket) {
+        showSnackBar(context, "You can't create two tickets in same time");
+      } else {
+        checkWallet(
+            noOfStations: noOfStations,
+            subId: subId,
+            price: price,
+            ticket: ticket,
+            context: context);
+      }
+    });
+  }
+
+  Future<void> checkWallet(
+      {required String noOfStations,
+      required String subId,
+      required int price,
+      required bool ticket,
+      required BuildContext context}) async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String uid = prefs.getString("uid") ?? "";
+
     await walletsReference.where('uid', isEqualTo: uid).get().then((value) {
       value.docs.forEach((result) {
         var balance = result.get('balance');
@@ -353,7 +462,7 @@ class AuthService {
     });
   }
 
-  Future<void> getBalance(
+  Future<void> checkBalance(
       {required String uid,
       required String noOfStations,
       required String subId,
@@ -415,6 +524,122 @@ class AuthService {
     });
 
     showSnackBar(context, "Wallet charged");
+  }
+
+  Future<Wallet> getBalance() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String uid = prefs.getString("uid") ?? "";
+    late Wallet wallet;
+
+    CollectionReference walletsReference =
+        FirebaseFirestore.instance.collection('Wallets');
+    await walletsReference.where('uid', isEqualTo: uid).get().then((value) {
+      value.docs.forEach((result) {
+        wallet = Wallet(
+            id: result.id,
+            uid: result.get('uid'),
+            balance: result.get('balance'));
+      });
+    });
+
+    return wallet;
+  }
+
+  Future<List> getTicketPrices() async {
+    CollectionReference ticketPricesReference =
+        FirebaseFirestore.instance.collection('Tickets_Prices');
+    List<Map<String, Object>> ticketPrices = <Map<String, Object>>[];
+
+    await ticketPricesReference.orderBy("order").get().then((value) {
+      value.docs.forEach((result) {
+        //print("value: ${result.toString()}");
+        ticketPrices.add({
+          "noOfStations": result.get("noOfStations"),
+          "price": result.get("price"),
+          "name": result.get("name")
+        });
+        //ticketPrices.add({"price": result.get("price")});
+
+        print(ticketPrices);
+      });
+    });
+
+    return ticketPrices;
+  }
+
+  Future<List> getNotifications() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String uid = prefs.getString("uid") ?? "";
+
+    List<Map<String, Object>> notifications = <Map<String, Object>>[];
+
+    await notificationsReference
+        .where('uid', isEqualTo: uid)
+        .get()
+        .then((value) {
+      value.docs.forEach((result) {
+        //print("value: ${result.toString()}");
+        notifications.add({
+          "title": result.get("title"),
+          "body": result.get("body"),
+        });
+        //ticketPrices.add({"price": result.get("price")});
+
+        print(notifications);
+      });
+    });
+
+    return notifications;
+  }
+
+  Future<List> getStations(int line) async {
+    List<Map<String, Object>> stations = <Map<String, Object>>[];
+
+    await stationsReference
+        .where('line', isEqualTo: line)
+        .orderBy('Station ID')
+        .get()
+        .then((value) {
+      value.docs.forEach((result) {
+        //print("value: ${result.toString()}");
+        stations.add({
+          "Station ID": result.get("Station ID"),
+          "name": result.get("name"),
+          "line": result.get("line"),
+        });
+        //ticketPrices.add({"price": result.get("price")});
+      });
+    });
+
+    print(stations);
+    return stations;
+  }
+
+  Future<List> getSubscriptions() async {
+    List<Map<String, Object>> subscriptionsPrices = <Map<String, Object>>[];
+    CollectionReference monthlyReference = FirebaseFirestore.instance
+        .collection('Subscriptions_prices')
+        .doc('ZZ9xxdI0g0FkRbbnlvXl')
+        .collection('Monthly');
+
+    await monthlyReference.orderBy("order").get().then((value) {
+      value.docs.forEach((result) {
+        subscriptionsPrices.add({
+          "subId": result.id,
+          "destination": result.get("destination"),
+          "price": result.get("price"),
+          "tripPrice": result.get("tripPrice"),
+          "discount": result.get("discount")
+        });
+        //ticketPrices.add({"price": result.get("price")});
+
+        print(subscriptionsPrices);
+      });
+    });
+
+    return subscriptionsPrices;
   }
 
   Future<void> signOut() async {
