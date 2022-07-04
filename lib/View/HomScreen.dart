@@ -482,14 +482,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         child: Container(
                             margin: EdgeInsets.only(
                                 left: width > 1000
-                                    ? width * 0.45
+                                    ? width * 0.30
                                     : width > 400
-                                        ? width * 0.40
+                                        ? width * 0.20
                                         : 100,
                                 right: width > 1000
-                                    ? width * 0.45
+                                    ? width * 0.30
                                     : width > 400
-                                        ? width * 0.40
+                                        ? width * 0.20
                                         : 100),
                             width: 190.0,
                             height: 55.0,

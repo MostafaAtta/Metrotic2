@@ -100,7 +100,7 @@
     "Last Ticket":"اخر تذكرة",
     "Setting":"الاعدادات",
     "Edit your profile information ":"تعديل بيانات الملف الشخصى",
-    "Language":"الغات",
+    "Language":"اللغات",
     "Payment":"الدفع",
     "Control all Payment Method":"التحكم في وسيله الدفع",
     "Change your Language ":"تغيير اللغة  ",
@@ -205,7 +205,8 @@
     "channel id":"معرف القناة",
     "log in":"تسجيل الدخول",
     "Your balance:": "رصيدك: ",
-    "Change Language": "تغير اللغة"
+    "Change Language": "تغير اللغة",
+    "Book Ticket": "احجز تذكرة"
 
     
     

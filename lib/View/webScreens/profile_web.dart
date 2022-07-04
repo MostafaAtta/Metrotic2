@@ -154,7 +154,7 @@ class _ProfileWebState extends State<ProfileWeb> {
                                       width: 20,
                                     ),
                                     Text(
-                                      user.tagID,
+                                      user.nationalID,
                                       style: TextStyle(
                                         fontFamily: 'Montserrat',
                                         fontSize: 29,
@@ -181,7 +181,7 @@ class _ProfileWebState extends State<ProfileWeb> {
                                       width: 20,
                                     ),
                                     Text(
-                                      user.nationalID,
+                                      user.tagID,
                                       style: TextStyle(
                                         fontFamily: 'Montserrat',
                                         fontSize: 29,
