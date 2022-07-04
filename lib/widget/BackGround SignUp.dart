@@ -25,12 +25,14 @@ class BackGroundSignUp extends StatelessWidget {
         child: Column(children: [
 
           SizedBox(
-            height: height*0.10-50,
+            height: 10,
           ),
-          Center(
-              child:
-              Image.asset("assets/logo.png",)
+          Expanded(
+            child: Center(
+                child:
+                Image.asset("assets/logo.png",)
 
+            ),
           )
           ,
           SizedBox(height:    height*0.10-55,

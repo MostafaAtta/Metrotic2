@@ -57,92 +57,94 @@ class _SignUpState extends State<SignUp> {
                           : 25),
               //margin: EdgeInsets.only(left:width>1000?width*0.17:width> 500?width*0.12:25,right: width>1000?width*0.17:width> 500?width*0.12:25),
 
-              child: Column(
-                children: [
-                  TextField(
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(32.0))),
-                      labelText: "Name".tr(),
-                      hintText: "Enter Your Full Name".tr(),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(32.0))),
+                        labelText: "Name".tr(),
+                        hintText: "Enter Your Full Name".tr(),
+                      ),
+                      keyboardType: TextInputType.name,
+                      autofocus: true,
                     ),
-                    keyboardType: TextInputType.name,
-                    autofocus: true,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextField(
-                    controller: phoneController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(32.0))),
-                      labelText: "Phone Number".tr(),
-                      hintText: "Enter Your Number".tr(),
+                    SizedBox(
+                      height: 20,
                     ),
-                    keyboardType: TextInputType.phone,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(32.0))),
-                      labelText: "Email".tr(),
-                      hintText: "Enter Your Email".tr(),
+                    TextField(
+                      controller: phoneController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(32.0))),
+                        labelText: "Phone Number".tr(),
+                        hintText: "Enter Your Number".tr(),
+                      ),
+                      keyboardType: TextInputType.phone,
                     ),
-                    keyboardType: TextInputType.emailAddress,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextField(
-                    controller: passwordController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(32.0))),
-                      labelText: "Password".tr(),
-                      hintText: "Enter Your Password".tr(),
+                    SizedBox(
+                      height: 20,
                     ),
-                    keyboardType: TextInputType.visiblePassword,
-                    obscureText: true,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextField(
-                    controller: tagIDController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(32.0))),
-                      labelText: "Tag ID".tr(),
-                      hintText: "Enter Your Tag ID".tr(),
+                    TextField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(32.0))),
+                        labelText: "Email".tr(),
+                        hintText: "Enter Your Email".tr(),
+                      ),
+                      keyboardType: TextInputType.emailAddress,
                     ),
-                    keyboardType: TextInputType.visiblePassword,
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  TextField(
-                    controller: nationalIDController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(32.0))),
-                      labelText: "National ID".tr(),
-                      hintText: "Enter Your National ID".tr(),
+                    SizedBox(
+                      height: 20,
                     ),
-                    keyboardType: TextInputType.visiblePassword,
-                  ),
-                ],
+                    TextField(
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(32.0))),
+                        labelText: "Password".tr(),
+                        hintText: "Enter Your Password".tr(),
+                      ),
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      controller: tagIDController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(32.0))),
+                        labelText: "Tag ID".tr(),
+                        hintText: "Enter Your Tag ID".tr(),
+                      ),
+                      keyboardType: TextInputType.visiblePassword,
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                      controller: nationalIDController,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(32.0))),
+                        labelText: "National ID".tr(),
+                        hintText: "Enter Your National ID".tr(),
+                      ),
+                      keyboardType: TextInputType.visiblePassword,
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(
